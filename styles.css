@@ -1,0 +1,171 @@
+* {
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-image: url("imgs/bg-desktop-light.3508d620.jpg");
+    background-repeat: no-repeat;
+    background-size: 100vw auto;
+    /*width: 100vw;*/
+    height: 10rem;
+    margin: 0;
+    padding: 0;
+}
+
+header h1 {
+    display: inline-block;
+    letter-spacing: 1rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    padding: 4rem 0 0 5rem;
+}
+
+header .iconify-inline {
+    margin-left: 50vw;
+}
+
+.container {
+    width: 50rem;
+    margin: auto;
+}
+
+.newToDo {
+    box-shadow: 0 15px 35px -15px darkgray;
+    width: 80%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1rem auto;
+}
+
+.toDo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 96%;
+    height: 3.5rem;
+    padding: 0.1rem 0.5rem;
+    background-color: white;
+    border-radius: 0.5rem;
+}
+.circle1 {
+    margin: 0 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+    padding: 0.06rem;
+    background: darkgray;
+}
+
+input {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    padding: 0.5rem;
+    float: left;
+    font-size: 1rem;
+}
+
+.toDoBox {
+    box-shadow: 0 15px 35px -15px darkgray;
+    width: 80%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 2rem auto;
+}
+
+.toDoBox hr{
+    border: white;
+    border-bottom: 1px solid rgba(202, 202, 202, 0.5);
+    display: block;
+    width: 100%;
+}
+
+.toDoSelect {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+}
+
+.circle {
+    display: inline-block;
+    margin: 0 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+    padding: 0.07rem;
+    background: darkgray;
+}
+
+.box , .box1{
+    background: white;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+}
+
+.toDoText {
+    display: inline-block;
+    color: #6c6c6c;
+}
+
+.toDo:hover {
+    cursor: pointer;
+}
+
+.toDo:hover .circle {
+    background: -webkit-linear-gradient(left top, rgb(87, 221, 255) 0%, rgb(192, 88, 243) 100%);
+}
+
+.circleChecked {
+    background: -webkit-linear-gradient(left top, rgb(87, 221, 255) 0%, rgb(192, 88, 243) 100%);
+    content: url('https://api.iconify.design/teenyicons/tick-small-solid.svg?color=white&width=20&height=20');
+}
+
+.boxChecked {
+    display: none;
+}
+
+.toDo p {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: 0.2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checked {
+    color: #a7a7a7;
+    text-decoration: line-through;
+}
+
+.toDo-footer {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toDo-footer h4 {
+    display: inline-block;
+    font-weight: 200;
+    font-size: 1rem;
+    margin: 0.5rem 0.3rem;
+    color: gray;
+}
+.toDo-footer h4:first-of-type {
+    margin-left: 4rem;
+}
+.toDo-footer h4:last-of-type {
+    margin-right: 4rem;
+}

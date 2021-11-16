@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>toDoList</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+<body>
+<header>
+    <h1> TODO</h1>
+    <span class="iconify-inline" data-icon="emojione-monotone:crescent-moon" style="color: white;"
+          data-width="28"></span>
+</header>
+
+<div class="container">
+    <div class="newToDo">
+        <div class="toDo">
+            <div class="circle1">
+                <div class="box1"></div>
+            </div>
+            <input type="text" id="myInput" placeholder="Creat a new todo...">
+        </div>
+    </div>
+    <div class="toDoBox">
+        <div id="toDoContainer"></div>
+        <div class="toDo-footer">
+            <span> 2 items left</span>
+            <h4> All</h4>
+            <h4> Active</h4>
+            <h4> Completed</h4>
+            <span> CLear Completed</span>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+
+
+<script src="codes.js"></script>
+</body>
+</html>
