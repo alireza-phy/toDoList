@@ -1,3 +1,8 @@
+let toDoSelect = document.getElementsByClassName("toDoSelect")
+let toDoText = document.getElementsByClassName("toDoText")
+let circle = document.getElementsByClassName("circle")
+let box = document.getElementsByClassName("box")
+
 let doingList = [
     {
         text: "Complete online JavaScript course",
@@ -33,12 +38,14 @@ let doingList = [
 
 document.getElementById('myInput').addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
-        doingList.push({text:event.target.value, close: false, check: false})
+        doingList.push({text: event.target.value, close: false, check: false})
         document.getElementById('myInput').value = '';
+        event.preventDefault();
         toDoContainer.innerHTML = toDoCards(doingList)
+        checkdo(doingList)
+        changeCheck(doingList)
     }
 })
-console.log(doingList)
 
 function creatTodoCard(obj) {
     return `
@@ -53,9 +60,9 @@ function creatTodoCard(obj) {
          </div>
          <hr>
       `
- }
+}
 
- function toDoCards(arr) {
+function toDoCards(arr) {
     return arr.map(obj => {
         return creatTodoCard(obj)
     }).join('')
@@ -63,24 +70,35 @@ function creatTodoCard(obj) {
 
 let toDoContainer = document.getElementById('toDoContainer')
 toDoContainer.innerHTML = toDoCards(doingList)
+checkdo(doingList)
+changeCheck(toDoSelect)
 
 
 // select items of to Do list and change the styles
-//
-// let toDoSelect = document.getElementsByClassName("toDoSelect")
-// let toDoText = document.getElementsByClassName("toDoText")
-// let circle = document.getElementsByClassName("circle")
-// let box = document.getElementsByClassName("box")
-// for (let i = 0; i < doingList.length; i++) {
-//     toDoSelect[i].onclick = function () {
-//         circle[i].classList.toggle("circleChecked")
-//         toDoText[i].classList.toggle("checked")
-//         box[i].classList.toggle("boxChecked")
-//     }
-//
-// }
-//
-//
+
+function checkdo(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i]['check'] === true) {
+            toDoText[i].classList.add("checked")
+            circle[i].classList.add("circleChecked")
+            box[i].classList.add("boxChecked")
+        } else {
+            toDoText[i].classList.remove("checked")
+            circle[i].classList.remove("circleChecked")
+            box[i].classList.remove("boxChecked")
+        }
+    }
+}
+
+function changeCheck(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        arr[i].onclick = function () {
+            doingList[i]['check'] = !doingList[i]['check']
+            checkdo(doingList)
+        }
+    }
+}
+
 // let close = document.getElementsByClassName("close")
 // for (let i = 0; i < doingList.length; i++) {
 //     close[i].onclick = function () {
