@@ -43,46 +43,63 @@ let doingList = [
 function countChecked(arr) {
     let items = 0
     for (let i = 0; i < arr.length; i++) {
-        if ( !arr[i]['check']) items++
+        if (!arr[i]['check']) items++
     }
     leftItems.innerHTML = `${[items]} items left`
 }
 
-    allItems.onclick = function () {
-        allItems.style.color = 'blue'
-        completedItems.style.color = '#646464'
-        activeItems.style.color = '#646464'
-        toDoContainer.innerHTML = toDoCards(doingList)
-        checkdo(doingList)
-        changeCheck(doingList)
-        closeCart(close)
-        countChecked(doingList)
-    }
-
-    activeItems.onclick = function () {
-        allItems.style.color = '#646464'
-        completedItems.style.color = '#646464'
-        activeItems.style.color = 'blue'
-        let activeList = doingList.filter((key) => !key['check'])
-        toDoContainer.innerHTML = toDoCards(activeList)
-        checkdo(activeList)
-        changeCheck(activeList)
-        closeCart(close)
-        countChecked(activeList)
-    }
-
-completedItems.onclick = function () {
+allItems.onclick = function () {
+    allItems.style.color = 'blue'
+    completedItems.style.color = '#646464'
+    activeItems.style.color = '#646464'
+    toDoContainer.innerHTML = toDoCards(doingList)
+    checkdo(doingList)
+    changeCheck(doingList)
+    closeCart(close)
+    countChecked(doingList)
+    specifyItems(doingList)
+}
+// function active (arr) {
+//     activeItems.onclick = function () {
+//         allItems.style.color = '#646464'
+//         completedItems.style.color = '#646464'
+//         activeItems.style.color = 'blue'
+//         let activeList = doingList.filter((key) => !key['check'])
+//         toDoContainer.innerHTML = toDoCards(activeList)
+//         checkdo(activeList)
+//         changeCheck(activeList)
+//         closeCart(close)
+//         countChecked(activeList)
+//     }
+// }
+//
+function onComplete (arr) {
     allItems.style.color = '#646464'
     completedItems.style.color = 'blue'
     activeItems.style.color = '#646464'
-    let completeList = doingList.filter((key) => key['check'])
+    let completeList = specifyItems(arr)["completedArr"]
     toDoContainer.innerHTML = toDoCards(completeList)
     checkdo(completeList)
     changeCheck(completeList)
     closeCart(close)
     countChecked(completeList)
+    onComplete (doingList)
 }
 
+completedItems.onclick = onComplete(doingList)
+
+function specifyItems(arr,activeArr = [],completedArr = [] ) {
+    for (let key of arr) {
+        if (key['check'] === true) {
+         completedArr.push(key)
+        }
+        else {
+            activeArr.push(key)
+        }
+    }
+    return {activeArr,completedArr}
+}
+specifyItems(doingList)
 
 document.getElementById('myInput').addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
@@ -94,6 +111,7 @@ document.getElementById('myInput').addEventListener('keypress', (event) => {
         checkdo(doingList)
         closeCart(close)
         countChecked(doingList)
+        specifyItems(doingList)
     }
 })
 
@@ -141,6 +159,7 @@ function changeCheck(arr) {
             arr[i]['check'] = !arr[i]['check']
             checkdo(arr)
             countChecked(doingList)
+            specifyItems(doingList)
         }
     }
 }
@@ -153,9 +172,8 @@ function closeCart(closeArr) {
             closeCart(close)
             changeCheck(doingList)
             checkdo(doingList)
-            console.log(toDoSelect)
-            console.log(doingList)
             countChecked(doingList)
+            specifyItems(doingList)
         }
     }
 }
@@ -182,3 +200,4 @@ checkdo(doingList)
 changeCheck(doingList)
 closeCart(close)
 countChecked(doingList)
+specifyItems(doingList)
