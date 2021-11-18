@@ -1,14 +1,28 @@
+:root {
+    --firstcolor: transparent;
+    --secondcolor: white;
+}
+
 * {
     font-family: 'Josefin Sans', sans-serif;
     margin: 0;
     padding: 0;
 }
-header {
+
+body {
+    background-color: var(--firstcolor) ;
+}
+
+.container {
+
+}
+
+#header {
     background-image: url("imgs/bg-desktop-light.3508d620.jpg");
     background-repeat: no-repeat;
     background-size: 100vw auto;
     /*width: 100vw;*/
-    height: 10rem;
+    height: 20rem;
     margin: 0;
     padding: 0;
 }
@@ -22,8 +36,20 @@ header h1 {
     padding: 4rem 0 0 5rem;
 }
 
-header .iconify-inline {
+#light {
+    display: inline-block;
     margin-left: 50vw;
+    width: 2rem;
+    height: 2rem;
+    /*background-color: gray;*/
+}
+
+#moon {
+    display: inline-block;
+}
+
+#sun {
+    display: none;
 }
 
 .container {
@@ -32,11 +58,12 @@ header .iconify-inline {
 }
 
 .newToDo {
-    box-shadow: 0 15px 35px -15px darkgray;
+    box-shadow: 0 10px 35px -20px darkgray;
     width: 80%;
     height: auto;
     border-radius: 0.5rem;
     margin: 1rem auto;
+    background-color: var(--secondcolor);
 }
 
 .toDo {
@@ -47,7 +74,7 @@ header .iconify-inline {
     width: 96%;
     height: 3.5rem;
     padding: 0.1rem 0.5rem;
-    background-color: white;
+    background-color: var(--secondcolor);
     border-radius: 0.5rem;
 }
 .circle1 {
@@ -55,7 +82,7 @@ header .iconify-inline {
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 100%;
-    padding: 0.06rem;
+    padding: 0.13rem;
     background: darkgray;
 }
 
@@ -67,6 +94,9 @@ input {
     padding: 0.5rem;
     float: left;
     font-size: 1rem;
+    outline: none;
+    background: transparent;
+    color: #a7a7a7;
 }
 
 .toDoBox {
@@ -75,6 +105,7 @@ input {
     height: auto;
     border-radius: 0.5rem;
     margin: 2rem auto;
+    background-color: var(--secondcolor);
 }
 
 .toDoBox hr{
@@ -93,21 +124,30 @@ input {
     justify-content: left;
 }
 
+.close {
+    display: none;
+}
+
+.toDo:hover .close{
+    display: inline-block;
+}
+
 .circle {
     display: inline-block;
     margin: 0 0.5rem;
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 100%;
-    padding: 0.07rem;
+    padding: 0.13rem;
     background: darkgray;
 }
 
 .box , .box1{
-    background: white;
+    background: var(--secondcolor);
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 100%;
+
 }
 
 .toDoText {
@@ -158,10 +198,15 @@ input {
 
 .toDo-footer h4 {
     display: inline-block;
-    font-weight: 200;
+    font-weight: 700;
     font-size: 1rem;
-    margin: 0.5rem 0.3rem;
-    color: gray;
+    margin: 0.5rem 0.5rem;
+    color: #646464;
+}
+
+.toDo-footer h4:hover {
+    color: #323232;
+    cursor: pointer;
 }
 .toDo-footer h4:first-of-type {
     margin-left: 4rem;

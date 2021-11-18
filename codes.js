@@ -2,39 +2,87 @@ let toDoSelect = document.getElementsByClassName("toDoSelect")
 let toDoText = document.getElementsByClassName("toDoText")
 let circle = document.getElementsByClassName("circle")
 let box = document.getElementsByClassName("box")
+let moon = document.getElementById('moon')
+let sun = document.getElementById('sun')
+let light = document.getElementById('light')
+let header = document.getElementById("header")
+let close = document.getElementsByClassName('close')
+let toDoContainer = document.getElementById('toDoContainer')
+let leftItems = document.getElementById('leftItems')
+let allItems = document.getElementById('allItems')
+let activeItems = document.getElementById('activeItems')
+let completedItems = document.getElementById('completedItems')
 
 let doingList = [
     {
         text: "Complete online JavaScript course",
-        close: false,
         check: false
     },
     {
         text: "Jog around the park 3x",
-        close: false,
         check: false
     },
     {
         text: "10 minutes meditation",
-        close: false,
         check: false
     },
     {
         text: "Read for 1 hour",
-        close: false,
         check: false
     },
     {
         text: "Pick up groceries",
-        close: false,
-        check: false
+        check: true
     },
     {
         text: "Complete Todo App Frontend Mentor",
-        close: false,
         check: false
     },
 ]
+
+function countChecked(arr) {
+    let items = 0
+    for (let i = 0; i < arr.length; i++) {
+        if ( !arr[i]['check']) items++
+    }
+    leftItems.innerHTML = `${[items]} items left`
+}
+
+    allItems.onclick = function () {
+        allItems.style.color = 'blue'
+        completedItems.style.color = '#646464'
+        activeItems.style.color = '#646464'
+        toDoContainer.innerHTML = toDoCards(doingList)
+        checkdo(doingList)
+        changeCheck(doingList)
+        closeCart(close)
+        countChecked(doingList)
+    }
+
+    activeItems.onclick = function () {
+        allItems.style.color = '#646464'
+        completedItems.style.color = '#646464'
+        activeItems.style.color = 'blue'
+        let activeList = doingList.filter((key) => !key['check'])
+        toDoContainer.innerHTML = toDoCards(activeList)
+        checkdo(activeList)
+        changeCheck(activeList)
+        closeCart(close)
+        countChecked(activeList)
+    }
+
+completedItems.onclick = function () {
+    allItems.style.color = '#646464'
+    completedItems.style.color = 'blue'
+    activeItems.style.color = '#646464'
+    let completeList = doingList.filter((key) => key['check'])
+    toDoContainer.innerHTML = toDoCards(completeList)
+    checkdo(completeList)
+    changeCheck(completeList)
+    closeCart(close)
+    countChecked(completeList)
+}
+
 
 document.getElementById('myInput').addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
@@ -42,8 +90,10 @@ document.getElementById('myInput').addEventListener('keypress', (event) => {
         document.getElementById('myInput').value = '';
         event.preventDefault();
         toDoContainer.innerHTML = toDoCards(doingList)
-        checkdo(doingList)
         changeCheck(doingList)
+        checkdo(doingList)
+        closeCart(close)
+        countChecked(doingList)
     }
 })
 
@@ -56,7 +106,7 @@ function creatTodoCard(obj) {
                  </div>
                  <p class="toDoText"> ${obj['text']} </p>
              </div>
- <svg class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none"><path d="M17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41L17.59 5z" fill="gray"/></g></svg>
+ <svg class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="30" height="30" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none"><path d="M17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41L17.59 5z" fill="gray"/></g></svg>
          </div>
          <hr>
       `
@@ -67,12 +117,6 @@ function toDoCards(arr) {
         return creatTodoCard(obj)
     }).join('')
 }
-
-let toDoContainer = document.getElementById('toDoContainer')
-toDoContainer.innerHTML = toDoCards(doingList)
-checkdo(doingList)
-changeCheck(toDoSelect)
-
 
 // select items of to Do list and change the styles
 
@@ -91,27 +135,50 @@ function checkdo(arr) {
 }
 
 function changeCheck(arr) {
+    const toDoSelect = document.getElementsByClassName("toDoSelect")
     for (let i = 0; i < arr.length; i++) {
-        arr[i].onclick = function () {
-            doingList[i]['check'] = !doingList[i]['check']
-            checkdo(doingList)
+        toDoSelect[i].onclick = function () {
+            arr[i]['check'] = !arr[i]['check']
+            checkdo(arr)
+            countChecked(doingList)
         }
     }
 }
 
-// let close = document.getElementsByClassName("close")
-// for (let i = 0; i < doingList.length; i++) {
-//     close[i].onclick = function () {
-//         doingList.splice(i, 1)
-//         toDoContainer.innerHTML = toDoCards(doingList)
-//         for (let i = 0; i < doingList.length; i++) {
-//             toDoSelect[i].onclick = function () {
-//                 circle[i].classList.toggle("circleChecked")
-//                 toDoText[i].classList.toggle("checked")
-//                 box[i].classList.toggle("boxChecked")
-//             }
-//
-//         }
-//
-//     }
-// }
+function closeCart(closeArr) {
+    for (let i = 0; i < closeArr.length; i++) {
+        closeArr[i].onclick = function () {
+            doingList.splice(i, 1)
+            toDoContainer.innerHTML = toDoCards(doingList)
+            closeCart(close)
+            changeCheck(doingList)
+            checkdo(doingList)
+            console.log(toDoSelect)
+            console.log(doingList)
+            countChecked(doingList)
+        }
+    }
+}
+
+light.onclick = function () {
+    if (moon.style.display !== 'inline-block') {
+        sun.style.display = 'none'
+        moon.style.display = 'inline-block'
+        header.style.backgroundImage = "url('imgs/bg-desktop-light.3508d620.jpg')";
+        document.documentElement.style.setProperty('--firstcolor', 'transparent')
+        document.documentElement.style.setProperty('--secondcolor', 'white')
+    } else {
+        moon.style.display = 'none'
+        sun.style.display = 'inline-block'
+        header.style.backgroundImage = "url('imgs/bg-desktop-dark.73e47dbb.jpg')";
+        document.documentElement.style.setProperty('--firstcolor', '#161722')
+        document.documentElement.style.setProperty('--secondcolor', '#25273c')
+    }
+}
+
+
+toDoContainer.innerHTML = toDoCards(doingList)
+checkdo(doingList)
+changeCheck(doingList)
+closeCart(close)
+countChecked(doingList)
