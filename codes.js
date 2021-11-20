@@ -12,6 +12,8 @@ let leftItems = document.getElementById('leftItems')
 let allItems = document.getElementById('allItems')
 let activeItems = document.getElementById('activeItems')
 let completedItems = document.getElementById('completedItems')
+let clearCompleted = document.getElementById('clearCompleted')
+let filterNum = 1 ;
 
 let doingList = [
     {
@@ -40,6 +42,17 @@ let doingList = [
     },
 ]
 
+let data = localStorage.getItem("TODO");
+
+if (JSON.parse(data).length === 0) {
+    localStorage.setItem("TODO", JSON.stringify(doingList));
+}
+
+console.log(JSON.parse(data))
+doingList = JSON.parse(data)
+
+
+
 function countChecked(arr) {
     let items = 0
     for (let i = 0; i < arr.length; i++) {
@@ -47,63 +60,70 @@ function countChecked(arr) {
     }
     leftItems.innerHTML = `${[items]} items left`
 }
-
-allItems.onclick = function () {
-    allItems.style.color = 'blue'
-    completedItems.style.color = '#646464'
-    activeItems.style.color = '#646464'
+function showAll () {
+    filterNum = 1;
+    allItems.style.color = '#4761bf'
+    completedItems.style.color = 'inherit'
+    activeItems.style.color = 'inherit'
     toDoContainer.innerHTML = toDoCards(doingList)
     checkdo(doingList)
     changeCheck(doingList)
     closeCart(close)
     countChecked(doingList)
-    specifyItems(doingList)
-}
-// function active (arr) {
-//     activeItems.onclick = function () {
-//         allItems.style.color = '#646464'
-//         completedItems.style.color = '#646464'
-//         activeItems.style.color = 'blue'
-//         let activeList = doingList.filter((key) => !key['check'])
-//         toDoContainer.innerHTML = toDoCards(activeList)
-//         checkdo(activeList)
-//         changeCheck(activeList)
-//         closeCart(close)
-//         countChecked(activeList)
-//     }
-// }
-//
-function onComplete (arr) {
-    allItems.style.color = '#646464'
-    completedItems.style.color = 'blue'
-    activeItems.style.color = '#646464'
-    let completeList = specifyItems(arr)["completedArr"]
-    toDoContainer.innerHTML = toDoCards(completeList)
-    checkdo(completeList)
-    changeCheck(completeList)
-    closeCart(close)
-    countChecked(completeList)
-    onComplete (doingList)
 }
 
-completedItems.onclick = onComplete(doingList)
+function active () {
+    filterNum = 2;
+    activeItems.style.color = '#4761bf'
+    completedItems.style.color = 'inherit'
+    allItems.style.color = 'inherit'
+        let activeList = doingList.filter((key) => !key['check'])
+        toDoContainer.innerHTML = toDoCards(activeList)
+        checkdo(activeList)
+        changeCheck(activeList)
+        closeCart(close)
+        countChecked(doingList)
+}
 
-function specifyItems(arr,activeArr = [],completedArr = [] ) {
-    for (let key of arr) {
-        if (key['check'] === true) {
-         completedArr.push(key)
-        }
-        else {
-            activeArr.push(key)
-        }
+function complete () {
+    filterNum = 3;
+    completedItems.style.color = '#4761bf'
+    allItems.style.color = 'inherit'
+    activeItems.style.color = 'inherit'
+    let completeList = doingList.filter((key) => key['check'])
+        toDoContainer.innerHTML = toDoCards(completeList)
+        checkdo(completeList)
+        changeCheck(completeList)
+        closeCart(close)
+        countChecked(doingList)
     }
-    return {activeArr,completedArr}
+
+completedItems.onclick = complete
+activeItems.onclick = active
+allItems.onclick = showAll
+
+
+function clear () {
+    doingList = doingList.filter((key) => !key['check'])
+    toDoContainer.innerHTML = toDoCards(doingList)
+    checkdo(doingList)
+    changeCheck(doingList)
+    closeCart(close)
+    countChecked(doingList)
+    localStorage.setItem("TODO", JSON.stringify(doingList));
+
+    if (filterNum === 1) return showAll()
+    if (filterNum === 3) return complete()
+    if (filterNum === 2) return active ()
 }
-specifyItems(doingList)
+
+clearCompleted.onclick = clear
+
+
 
 document.getElementById('myInput').addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
-        doingList.push({text: event.target.value, close: false, check: false})
+        doingList.push({text: event.target.value, check: false})
         document.getElementById('myInput').value = '';
         event.preventDefault();
         toDoContainer.innerHTML = toDoCards(doingList)
@@ -111,7 +131,7 @@ document.getElementById('myInput').addEventListener('keypress', (event) => {
         checkdo(doingList)
         closeCart(close)
         countChecked(doingList)
-        specifyItems(doingList)
+        localStorage.setItem("TODO", JSON.stringify(doingList));
     }
 })
 
@@ -136,7 +156,6 @@ function toDoCards(arr) {
     }).join('')
 }
 
-// select items of to Do list and change the styles
 
 function checkdo(arr) {
     for (let i = 0; i < arr.length; i++) {
@@ -159,10 +178,15 @@ function changeCheck(arr) {
             arr[i]['check'] = !arr[i]['check']
             checkdo(arr)
             countChecked(doingList)
-            specifyItems(doingList)
+            console.log(filterNum)
+            localStorage.setItem("TODO", JSON.stringify(doingList));
+                if (filterNum === 1) return showAll()
+                if (filterNum === 3) return complete()
+                if (filterNum === 2) return active ()
+            }
         }
     }
-}
+
 
 function closeCart(closeArr) {
     for (let i = 0; i < closeArr.length; i++) {
@@ -173,7 +197,7 @@ function closeCart(closeArr) {
             changeCheck(doingList)
             checkdo(doingList)
             countChecked(doingList)
-            specifyItems(doingList)
+            localStorage.setItem("TODO", JSON.stringify(doingList));
         }
     }
 }
@@ -200,4 +224,3 @@ checkdo(doingList)
 changeCheck(doingList)
 closeCart(close)
 countChecked(doingList)
-specifyItems(doingList)

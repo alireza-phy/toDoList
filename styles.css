@@ -214,3 +214,7 @@ input {
 .toDo-footer h4:last-of-type {
     margin-right: 4rem;
 }
+
+#clearCompleted:hover {
+    cursor: pointer;
+}
