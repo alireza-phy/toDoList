@@ -1,44 +1,59 @@
 :root {
     --firstcolor: transparent;
     --secondcolor: white;
+    --filter: #a7a7a7;
+    --filterSelect: blue;
+    --filterhover-day: #323232;
+    --filterhover-nght: white;
+
 }
 
 * {
     font-family: 'Josefin Sans', sans-serif;
     margin: 0;
     padding: 0;
+    color: #323232;
 }
 
 body {
-    background-color: var(--firstcolor) ;
+    width: 100vw;
 }
 
-.container {
-
+.main-container {
+    width: 100%;
+    background-image: url("imgs/bg-desktop-light.3508d620.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    background-color: var(--firstcolor)  ;
+    /*background-color: aqua ;*/
 }
 
 #header {
-    background-image: url("imgs/bg-desktop-light.3508d620.jpg");
-    background-repeat: no-repeat;
-    background-size: 100vw auto;
-    /*width: 100vw;*/
-    height: 20rem;
-    margin: 0;
-    padding: 0;
+    margin: auto;
+    padding: 4rem 0;
+    width: 32rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
-header h1 {
+#header h1 {
     display: inline-block;
     letter-spacing: 1rem;
     font-size: 2.5rem;
     font-weight: 700;
     color: white;
-    padding: 4rem 0 0 5rem;
+    /*padding: 4rem 0 0 5rem;*/
 }
 
 #light {
     display: inline-block;
-    margin-left: 50vw;
+    /*margin-left: 50vw;*/
     width: 2rem;
     height: 2rem;
     /*background-color: gray;*/
@@ -53,16 +68,15 @@ header h1 {
 }
 
 .container {
-    width: 50rem;
+    width: 32rem;
     margin: auto;
 }
 
 .newToDo {
     box-shadow: 0 10px 35px -20px darkgray;
-    width: 80%;
+    width: 100%;
     height: auto;
     border-radius: 0.5rem;
-    margin: 1rem auto;
     background-color: var(--secondcolor);
 }
 
@@ -101,10 +115,10 @@ input {
 
 .toDoBox {
     box-shadow: 0 15px 35px -15px darkgray;
-    width: 80%;
+    width: 100%;
     height: auto;
     border-radius: 0.5rem;
-    margin: 2rem auto;
+    margin: 2rem 0;
     background-color: var(--secondcolor);
 }
 
@@ -192,29 +206,30 @@ input {
 .toDo-footer {
     height: 4rem;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
-.toDo-footer h4 {
+.filterOptions {
     display: inline-block;
     font-weight: 700;
     font-size: 1rem;
     margin: 0.5rem 0.5rem;
-    color: #646464;
+    color: var(--filter);
 }
 
 .toDo-footer h4:hover {
     color: #323232;
     cursor: pointer;
 }
-.toDo-footer h4:first-of-type {
-    margin-left: 4rem;
-}
-.toDo-footer h4:last-of-type {
-    margin-right: 4rem;
-}
+
 
 #clearCompleted:hover {
     cursor: pointer;
+}
+
+#dragAndDrop {
+    margin: auto;
+    width: 55%;
 }

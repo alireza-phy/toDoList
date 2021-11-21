@@ -5,7 +5,7 @@ let box = document.getElementsByClassName("box")
 let moon = document.getElementById('moon')
 let sun = document.getElementById('sun')
 let light = document.getElementById('light')
-let header = document.getElementById("header")
+let header = document.getElementsByClassName("main-container")[0]
 let close = document.getElementsByClassName('close')
 let toDoContainer = document.getElementById('toDoContainer')
 let leftItems = document.getElementById('leftItems')
@@ -13,6 +13,7 @@ let allItems = document.getElementById('allItems')
 let activeItems = document.getElementById('activeItems')
 let completedItems = document.getElementById('completedItems')
 let clearCompleted = document.getElementById('clearCompleted')
+let filterOptions = document.getElementsByClassName("filterOptions")
 let filterNum = 1 ;
 
 let doingList = [
@@ -44,11 +45,11 @@ let doingList = [
 
 let data = localStorage.getItem("TODO");
 
-if (JSON.parse(data).length === 0) {
+// if (JSON.parse(data).length === 0 || JSON.parse(data).value === null || JSON.parse(data).value === undefined || JSON.parse(data).value === [] || JSON.parse(data).value === 0 ) {
+if (localStorage.getItem("TODO") === '[]' ) {
     localStorage.setItem("TODO", JSON.stringify(doingList));
 }
 
-console.log(JSON.parse(data))
 doingList = JSON.parse(data)
 
 
@@ -62,9 +63,9 @@ function countChecked(arr) {
 }
 function showAll () {
     filterNum = 1;
-    allItems.style.color = '#4761bf'
-    completedItems.style.color = 'inherit'
-    activeItems.style.color = 'inherit'
+    allItems.style.color = 'var(--filterSelect)'
+    completedItems.style.color = 'var(--filter)'
+    activeItems.style.color = 'var(--filter)'
     toDoContainer.innerHTML = toDoCards(doingList)
     checkdo(doingList)
     changeCheck(doingList)
@@ -74,9 +75,9 @@ function showAll () {
 
 function active () {
     filterNum = 2;
-    activeItems.style.color = '#4761bf'
-    completedItems.style.color = 'inherit'
-    allItems.style.color = 'inherit'
+    activeItems.style.color = 'var(--filterSelect)'
+    completedItems.style.color = 'var(--filter)'
+    allItems.style.color = 'var(--filter)'
         let activeList = doingList.filter((key) => !key['check'])
         toDoContainer.innerHTML = toDoCards(activeList)
         checkdo(activeList)
@@ -87,9 +88,9 @@ function active () {
 
 function complete () {
     filterNum = 3;
-    completedItems.style.color = '#4761bf'
-    allItems.style.color = 'inherit'
-    activeItems.style.color = 'inherit'
+    completedItems.style.color = 'var(--filterSelect)'
+    allItems.style.color = 'var(--filter)'
+    activeItems.style.color = 'var(--filter)'
     let completeList = doingList.filter((key) => key['check'])
         toDoContainer.innerHTML = toDoCards(completeList)
         checkdo(completeList)
@@ -224,3 +225,19 @@ checkdo(doingList)
 changeCheck(doingList)
 closeCart(close)
 countChecked(doingList)
+
+
+
+filterOptions[0].style.color='var(--filterSelect)'
+for (let i=0;i<filterOptions.length;i++){
+    filterOptions[i].onmouseenter=function (){
+
+        if(filterOptions[i].style.color!=='var(--filterSelect)') filterOptions[i].style.color='var(--filterhover-day)'
+    }
+    filterOptions[i].onmouseout=function (){
+        for(let j=0;j<filterOptions.length;j++){
+            if(filterOptions[j].style.color!=='var(--filterSelect)')
+                filterOptions[j].style.color="var(--filter)"
+        }
+    }
+}
