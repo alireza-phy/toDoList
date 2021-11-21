@@ -18,27 +18,27 @@ let filterNum = 1 ;
 
 let doingList = [
     {
-        text: "Complete online JavaScript course",
-        check: false
-    },
-    {
-        text: "Jog around the park 3x",
-        check: false
-    },
-    {
-        text: "10 minutes meditation",
-        check: false
-    },
-    {
-        text: "Read for 1 hour",
-        check: false
-    },
-    {
-        text: "Pick up groceries",
+        text: "sopoone bokhorim ba Fateme",
         check: true
     },
     {
-        text: "Complete Todo App Frontend Mentor",
+        text: "berim dor dor ba Fateme",
+        check: false
+    },
+    {
+        text: "codamona dorost konim ba Fateme",
+        check: false
+    },
+    {
+        text: "posht sare amir vahed gheibat konim :)",
+        check: false
+    },
+    {
+        text: "posht sare Mahed gheibat konim :/",
+        check: false
+    },
+    {
+        text: "class ostad mojahed",
         check: false
     },
 ]
@@ -210,12 +210,14 @@ light.onclick = function () {
         header.style.backgroundImage = "url('imgs/bg-desktop-light.3508d620.jpg')";
         document.documentElement.style.setProperty('--firstcolor', 'transparent')
         document.documentElement.style.setProperty('--secondcolor', 'white')
+        document.documentElement.style.setProperty('--filterhover', '#474f87')
     } else {
         moon.style.display = 'none'
         sun.style.display = 'inline-block'
         header.style.backgroundImage = "url('imgs/bg-desktop-dark.73e47dbb.jpg')";
         document.documentElement.style.setProperty('--firstcolor', '#161722')
         document.documentElement.style.setProperty('--secondcolor', '#25273c')
+        document.documentElement.style.setProperty('--filterhover', 'white')
     }
 }
 
@@ -232,7 +234,7 @@ filterOptions[0].style.color='var(--filterSelect)'
 for (let i=0;i<filterOptions.length;i++){
     filterOptions[i].onmouseenter=function (){
 
-        if(filterOptions[i].style.color!=='var(--filterSelect)') filterOptions[i].style.color='var(--filterhover-day)'
+        if(filterOptions[i].style.color!=='var(--filterSelect)') filterOptions[i].style.color='var(--filterhover)'
     }
     filterOptions[i].onmouseout=function (){
         for(let j=0;j<filterOptions.length;j++){

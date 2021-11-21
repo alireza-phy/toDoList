@@ -1,10 +1,9 @@
 :root {
     --firstcolor: transparent;
     --secondcolor: white;
-    --filter: #a7a7a7;
-    --filterSelect: blue;
-    --filterhover-day: #323232;
-    --filterhover-nght: white;
+    --filter: #828c99;
+    --filterSelect: #3939ff;
+    --filterhover: #474f87;
 
 }
 
@@ -12,7 +11,7 @@
     font-family: 'Josefin Sans', sans-serif;
     margin: 0;
     padding: 0;
-    color: #323232;
+    color: var(--filter);
 }
 
 body {
@@ -21,15 +20,11 @@ body {
 
 .main-container {
     width: 100%;
+    height: 100vh;
     background-image: url("imgs/bg-desktop-light.3508d620.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
     background-color: var(--firstcolor)  ;
-    /*background-color: aqua ;*/
 }
 
 #header {
@@ -153,7 +148,7 @@ input {
     height: 1.5rem;
     border-radius: 100%;
     padding: 0.13rem;
-    background: darkgray;
+    background: #5d68b3;
 }
 
 .box , .box1{
@@ -166,7 +161,7 @@ input {
 
 .toDoText {
     display: inline-block;
-    color: #6c6c6c;
+    color: #5d68b3;
 }
 
 .toDo:hover {
@@ -216,7 +211,6 @@ input {
     font-weight: 700;
     font-size: 1rem;
     margin: 0.5rem 0.5rem;
-    color: var(--filter);
 }
 
 .toDo-footer h4:hover {
@@ -226,6 +220,7 @@ input {
 
 
 #clearCompleted:hover {
+    color: var(--filterhover) ;
     cursor: pointer;
 }
 
